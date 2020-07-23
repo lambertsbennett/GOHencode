@@ -12,7 +12,7 @@ import(
 type Sequence struct {
 	Header string //contig id from fasta file
 	Seq string // contig sequence
-	OH [][]uint8 // one-hot encoded sequence
+	OH []uint8 // one-hot encoded sequence
 }
 
 type SequenceCollection struct {

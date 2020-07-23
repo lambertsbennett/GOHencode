@@ -11,27 +11,26 @@ import(
 func OHEncode(wg *sync.WaitGroup, in chan Sequence,lsp *SequenceCollection) {
 	for s := range in {
 		// Go's clunky way of making 2d slices.
-		oh := make([][]uint8, 4)
-		for i := range oh {
-			oh[i] = make([]uint8, len(s.Seq))
-		}
-		for i, rne := range s.Seq {
+		var ohL []uint8
+		for _, rne := range s.Seq {
+			oh := make([]uint8, 4)
 
 			switch rne {
 			case 'A':
-				oh[0][i] = 1
+				oh[0] = 1
 			case 'C':
-				oh[1][i] = 1
+				oh[1] = 1
 			case 'T':
-				oh[2][i] = 1
+				oh[2] = 1
 			case 'G':
-				oh[3][i] = 1
+				oh[3] = 1
 			}
+			ohL = append(ohL,oh...)
 		}
 
 			rs := NewSequence()
 			rs.Header = s.Header
-			rs.OH = oh
+			rs.OH = ohL
 			lsp.Append(*rs)
 	}
 	wg.Done()
@@ -41,7 +40,7 @@ func OHEncode(wg *sync.WaitGroup, in chan Sequence,lsp *SequenceCollection) {
 func (sc *SequenceCollection) ToParquet(fname string){
 	type tmpseq struct {
 		Header    string  `parquet:"name=name, type=UTF8, encoding=PLAIN_DICTIONARY"`
-		OH     [][]uint8   `parquet:"name=OHE, type=INT8, repetitiontype=REPEATED"`
+		OH     []uint8   `parquet:"name=OHE, type=UINT_8, repetitiontype=REPEATED"`
 	}
 
 	fw, err := local.NewLocalFileWriter(fname)
