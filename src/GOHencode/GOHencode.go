@@ -22,7 +22,7 @@ func main() {
 	flag.StringVar(&contigfile,"file","","Contig file in fasta format.")
 
 	var out string
-	flag.StringVar(&out,"o","./gomrlbpout.parquet","Output file.")
+	flag.StringVar(&out,"o","./encoded-seqs.parquet","Output file.")
 
 	flag.Parse()
 
