@@ -23,7 +23,7 @@ C | 0 | 0 | 1 | 0 | 0 | 0
 T | 0 | 1 | 0 | 0 | 0 | 0  
 G | 0 | 0 | 0 | 1 | 0 | 0  
 ```
-Parquet has some limitations with storing 2D arrays, so the output ecoded array is of the form:
+The one-hot encoded output is stored as a parquet file with the form:
 
 | Base1 | Base2 | ... | Basen|
 | ---   | ---   | --- | ---  |
