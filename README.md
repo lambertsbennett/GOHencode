@@ -2,7 +2,7 @@
 One-hot encoding of biological sequence data in Go.
 
 ## Premise
-Many common recurrent neural network architectures can accept one-hot encoded data of variable length as input. GOHencode is a convenient tool to one-hot encode entire fasta files.
+Many common neural network architectures can accept one-hot encoded data as input. GOHencode is a convenient tool to one-hot encode entire fasta files.
 
 The input to GOHencode is a (gzipped) fasta file of sequences. These files have a structure as follows:
 
